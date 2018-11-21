@@ -1,0 +1,6 @@
+.idea
+data/db
+node_modules
+json-examples
+test
+npm-debug.log

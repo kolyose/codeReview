@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app: 
+    build: .
+    container_name: "app"
+    environment:
+      - "DB_PATH=mongodb://mongo:27017/stock"
+    volumes:
+      - ./:/usr/src/app/src
+    ports: 
+      - "8080:8000"
+    depends_on: 
+      - "mongo"
+    links:
+      - "mongo"
+  mongo:
+    image: "mongo:4"
+    container_name: "mongo"
+    restart: unless-stopped
+    environment:
+      - "MONGO_DATA_DIR=/data"
+    volumes:
+        - ./data/db:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod
